@@ -28,29 +28,22 @@ export default function GamePage(): JSX.Element {
     </div>
   );
 
-/*
-      {(Questions as IQuestion[])[0].content}
-      {(Questions as IQuestion[])[1].content}
-      {(Questions as IQuestion[])[2].content}
-      {(Questions as IQuestion[])[3].content}
-      {(Questions as IQuestion[])[4].content}
-*/
+  const questionHandler = (question: IQuestion) => {
+    console.log(question.content)
+  }
+
 
   const ButtonsElement = ({el:{Questions}}: {el:ITopic}): JSX.Element => (
     <div className={style.flex}>
-      <button>100</button>
-      <button>200</button>
-      <button>300</button>
-      <button>400</button>
-      <button>500</button>
+      <button onClick={() => {questionHandler((Questions as IQuestion[])[0])}}>100</button>
+      <button onClick={() => {questionHandler((Questions as IQuestion[])[1])}}>200</button>
+      <button onClick={() => {questionHandler((Questions as IQuestion[])[2])}}>300</button>
+      <button onClick={() => {questionHandler((Questions as IQuestion[])[3])}}>400</button>
+      <button onClick={() => {questionHandler((Questions as IQuestion[])[4])}}>500</button>
     </div>
   );
 
-  const mockArr = [];
-  const mockArr2 = [];
-  for (let i = 0; i < 5; i += 1) {
-    // mockArr2.push(TopicElement());
-  }
+
 
   return (
     <div className={style.field}>
