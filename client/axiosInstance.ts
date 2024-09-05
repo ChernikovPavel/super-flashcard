@@ -9,7 +9,7 @@ interface AdaptAxiosRequestConfig extends AxiosRequestConfig {
 }
 
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: "http://localhost:3100",
+  baseURL: import.meta.env.VITE_BASE_URL,
 });
 
 let accessToken: string = "";
