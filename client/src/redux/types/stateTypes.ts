@@ -15,6 +15,32 @@ export interface IEntrie {
   updatedAt: string
 }
 
+export interface ITopic {
+  id: number,
+  title: string,
+  updatedAt: string,
+  Questions?: IQuestion[]
+}
+
+export interface IQuestion {
+  id: number,
+  TopicId: number,
+  content: string,
+  score: number,
+  createdAt: string,
+  updatedAt: string,
+  Answers?: Array<IAnswer>
+}
+
+export interface IAnswer {
+  id: number,
+  QuestionId: number,
+  content: string,
+  trueness: boolean,
+  createdAt: string,
+  updatedAt: string
+}
+
 export interface IInputs {
   name: string, description: string
 }
