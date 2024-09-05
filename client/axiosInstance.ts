@@ -9,7 +9,7 @@ interface AdaptAxiosRequestConfig extends AxiosRequestConfig {
 }
 
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: "http://localhost:3100",
+  baseURL: "http://localhost:3000",
 });
 
 let accessToken: string = "";

@@ -1,15 +1,13 @@
-import { configureStore } from '@reduxjs/toolkit'
-import counterSlice from './slices/counterSlice'
-import entriesSlice from './slices/entriesSlice'
-import userSlice from './slices/userSlice'
+import { configureStore } from "@reduxjs/toolkit";
+import userSlice from "./slices/userSlice";
+import authSlice from "./slices/authSlice";
 
 export const store = configureStore({
   reducer: {
-    counterSlice,
-    entriesSlice,
-    userSlice
+    userSlice,
+    authSlice,
   },
-})
+});
 
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

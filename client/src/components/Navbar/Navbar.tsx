@@ -1,47 +1,53 @@
-import { AxiosResponse } from "axios";
-import axiosInstance, { setAccessToken } from "../../../axiosInstance";
-import styles from "./navbar.module.css";
-import { Link, NavigateFunction, useNavigate } from "react-router-dom";
-// import { initUserState } from '../../initStates/initStates';
-// import { AppContext } from '../../context/AppContext';
-import { useAppSelector } from "../../redux/hooks";
+import "./navbar.module.css";
+import { NavigateFunction, useNavigate } from "react-router-dom";
+import { Tabs } from "@radix-ui/themes";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { login, register } from "../../redux/slices/authSlice";
+import { logoutUser } from "../../redux/thunkActions";
 
 export default function Navbar(): JSX.Element {
   const navigate: NavigateFunction = useNavigate();
 
   const { user } = useAppSelector((state) => state.userSlice);
 
+  const dispatch = useAppDispatch();
+
   const logoutHandler = async (): Promise<void> => {
-    const response: AxiosResponse = await axiosInstance.get(
-      `${import.meta.env.VITE_API}/auth/logout`
-    );
-    if (response.status === 200) {
-      // setUser(initUserState);
-      setAccessToken("");
-      navigate("/");
-    }
+    dispatch(logoutUser());
+    navigate("/");
   };
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.left}>
-        <Link to="/">На главную</Link>
-      </div>
-      <div className={styles.right}>
-        {user?.username ? (
-          <>
-            <Link to="/">{user.username}</Link>
-            <Link to="/" onClick={logoutHandler}>
-              Выйти
-            </Link>
-          </>
-        ) : (
-          <>
-            <Link to="/signin">Войти</Link>
-            <Link to="/signup">Регистрация</Link>
-          </>
-        )}
-      </div>
-    </div>
+    <>
+      <Tabs.Root defaultValue="login">
+        <Tabs.List>
+          {user?.email ? (
+            <>
+              <Tabs.Trigger
+                value="account"
+                onClick={() => navigate("/account")}
+              >
+                Статистика
+              </Tabs.Trigger>
+              <Tabs.Trigger value="logout" onClick={logoutHandler}>
+                Выход
+              </Tabs.Trigger>
+            </>
+          ) : (
+            <>
+              <Tabs.Trigger value="login" onClick={() => dispatch(login())}>
+                Авторизация
+              </Tabs.Trigger>
+              <Tabs.Trigger
+                value="register"
+                onClick={() => dispatch(register())}
+              >
+                Регистрация
+              </Tabs.Trigger>
+            </>
+          )}
+        </Tabs.List>
+      </Tabs.Root>
+    </>
   );
 }
