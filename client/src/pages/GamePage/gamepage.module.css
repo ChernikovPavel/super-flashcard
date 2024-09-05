@@ -1,0 +1,56 @@
+:root {
+  --sidebar-length: 25%;
+}
+
+.flex {
+  display: flex;
+}
+
+.field {
+    padding: .5em;
+  margin: 10em auto;
+  background-color: var(--main-gray-color);
+  color: var(--main-light-color);
+  width: 60em;
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: var(--sidebar-length) calc(
+      100% - var(--sidebar-length)
+    );
+}
+
+.sidepanel {
+  > div {
+    padding: 1em;
+    height: 4.5em;
+    > .flex > span {
+      margin: auto 0;
+      text-align: center;
+      display: block;
+    }
+  }
+}
+
+.mainpanel {
+  > .flex {
+    justify-content: space-around;
+    height: 4.5em;
+
+    > button {
+        margin: .17em;
+        width: 30%;
+        border-radius: 5px;
+
+        font-size: 30pt;
+        text-align: center;
+        display: block;
+    }
+  }
+}
+
+.separator {
+  background-color: var(--second-light-color);
+  margin-top: 1em;
+  height: 1px;
+  width: 90%;
+}

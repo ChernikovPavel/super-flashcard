@@ -1,5 +1,12 @@
 :root {
-  --main-bg-color: white;
+  /* фон */
+  --main-body-color: #d9d9d9;
+  /* дивы, кнопки и прочее */
+  --main-gray-color: #353535;
+  --second-gray-color: #252525;
+  --main-light-color: #dfdfdf;
+  --second-light-color: #c6c6c6;
+  --main-dark-color: #000;
 }
 
 * {
