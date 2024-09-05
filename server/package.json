@@ -12,7 +12,8 @@
     "undoSeed": "npx sequelize db:seed:all",
     "createDB": "npx sequelize db:create",
     "dropDB": "npx sequelize db:drop",
-    "resetDB": "npx sequelize db:drop && npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed:all"
+    "resetDB": "npx sequelize db:drop && npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed:all",
+    "migseed": "npx sequelize db:migrate:undo:all && npx sequelize db:migrate && npx sequelize db:seed:all"
   },
   "keywords": [],
   "author": "",
