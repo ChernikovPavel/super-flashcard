@@ -5,7 +5,10 @@ export default function Layout(): JSX.Element {
   return (
     <>
       <Navbar />
+      <p id="before-outlet">curt</p>
+      <div id="Outlet">
       <Outlet />
+      </div>
     </>
   );
 }

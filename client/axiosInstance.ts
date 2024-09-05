@@ -24,7 +24,7 @@ axiosInstance.interceptors.request.use(
     config.withCredentials = true;
 
     if (!config.headers.Authorization) {
-      config.headers.Authorization = `Raccoons ${accessToken}`;
+      config.headers.Authorization = accessToken;
     }
     return config;
   }
