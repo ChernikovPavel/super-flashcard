@@ -1,14 +1,36 @@
-import { useState } from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Layout from "./Layout";
+import AuthPage from "./pages/AuthPage/AuthPage";
+import GamePage from "./pages/GamePage/GamePage";
+import AccountPage from "./pages/AccountPage/AccountPage";
+// import ProtectedRoute from './ProtectedRoute';
+
 import "@radix-ui/themes/styles.css";
-import { Flex, Text, Button } from "@radix-ui/themes";
+// import { Flex, Text, Button } from "@radix-ui/themes";
 
 function App() {
-  return (
-    <Flex direction="column" gap="2">
-      <Text>Hello from Radix Themes :)</Text>
-      <Button>Let's go</Button>
-    </Flex>
-  );
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
+        {
+          path: "/",
+          element: <AuthPage />,
+        },
+        {
+          path: "/game",
+          element: <GamePage />,
+        },
+        {
+          path: "/account",
+          element: <AccountPage />,
+        },
+      ],
+    },
+  ]);
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;
