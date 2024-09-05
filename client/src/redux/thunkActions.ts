@@ -6,7 +6,7 @@ import { IEntrie, IInputs, IUser } from '../types/stateTypes';
 const { VITE_API }: ImportMeta['env'] = import.meta.env;
 
 export const getEntries = createAsyncThunk('entries/all', async (): Promise<IEntrie[]> => {
-  const { data }: AxiosResponse<IEntrie[]> = await axiosInstance.get(`${VITE_API}/tasks`)
+  const { data }: AxiosResponse<IEntrie[]> = await axiosInstance.get(`${VITE_API}/game/deck`)
   return data
 })
 

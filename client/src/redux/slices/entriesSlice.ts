@@ -21,7 +21,6 @@ const entriesSlice = createSlice({
   extraReducers: (builder: ActionReducerMapBuilder<EntriesState>) => {
     // * Получение
     builder.addCase(getEntries.pending, (state) => {
-      console.log("builder:", builder)
       state.loading = true
     })
     // * action.payload берётся из axios, из ф-ии getEntries
@@ -30,7 +29,7 @@ const entriesSlice = createSlice({
       state.loading = false
     })
     builder.addCase(getEntries.rejected, (state, action) => {
-      state.error = action.payload
+      state.error = (action.payload as Error)
       state.loading = false
     })
 
@@ -43,7 +42,7 @@ const entriesSlice = createSlice({
       state.loading = false
     })
     builder.addCase(addEntrie.rejected, (state, action) => {
-      state.error = action.payload
+      state.error = (action.payload as Error)
       state.loading = false
     })
 
@@ -56,7 +55,7 @@ const entriesSlice = createSlice({
       state.loading = false
     }) 
     builder.addCase(delEntrie.rejected, (state, action) => {
-      state.error = action.payload
+      state.error = (action.payload as Error)
       state.loading = false
     })
   },

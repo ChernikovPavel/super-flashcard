@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import style from './gamepage.module.css';
 import * as Separator from '@radix-ui/react-separator';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { getEntries } from '../../redux/thunkActions';
 export default function GamePage(): JSX.Element {
+  const { entries } = useAppSelector((state) => state.entriesSlice);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(getEntries());
+  }, [dispatch]);
+console.log(entries)
   const Mock = (): JSX.Element => (
     <div>
       <div className={style.flex}>
