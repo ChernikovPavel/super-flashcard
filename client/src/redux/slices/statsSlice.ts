@@ -1,36 +1,43 @@
-import { ActionReducerMapBuilder, createSlice } from "@reduxjs/toolkit"
+import { ActionReducerMapBuilder, createSlice } from "@reduxjs/toolkit";
 import { IStats } from "../types/stateTypes";
-import { getStats } from "../thunkActions"
+import { getStats } from "../thunkActions";
 
 export type StatsState = {
-  stats: IStats[],
-  loading: boolean,
-  error: object 
-}
+  stats: IStats[];
+  loading: boolean;
+  error: object;
+};
 
-const initState: StatsState = {
-  stats: [],
+const initialState: StatsState = {
+  stats: [
+    {
+      id: 0,
+      score: 0,
+      User: {
+        name: "",
+      },
+    },
+  ],
   loading: true,
-  error: {}
-}
+  error: {},
+};
 
 const statsSlice = createSlice({
-  name: 'StatusReducer',
-  initialState: initState,
+  name: "StatusReducer",
+  initialState,
   reducers: {},
   extraReducers: (builder: ActionReducerMapBuilder<StatsState>) => {
     builder.addCase(getStats.pending, (state) => {
-      state.loading = true
-    })
+      state.loading = true;
+    });
     builder.addCase(getStats.fulfilled, (state, action) => {
-      state.stats = action.payload
-      state.loading = false
-    })
-    builder.addCase(getStats.rejected, (state, action) => {
-      state.error = (action.payload as Error);
+      state.stats = action.payload;
       state.loading = false;
-    })
+    });
+    builder.addCase(getStats.rejected, (state) => {
+      state.loading = false;
+    });
   },
-})
+});
 
-export default statsSlice.reducer
+export default statsSlice.reducer;

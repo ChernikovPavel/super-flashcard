@@ -1,5 +1,7 @@
 "use strict";
 const bcrypt = require("bcrypt");
+"use strict";
+const bcrypt = require("bcrypt");
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -16,10 +18,15 @@ module.exports = {
         email: `${i}@${i}`,
         password: bcrypt.hashSync(String(i), 10),
       });
+      });
     }
+    queryInterface.bulkInsert("Users", arr);
     queryInterface.bulkInsert("Users", arr);
   },
 
+  async down(queryInterface, Sequelize) {
+    await queryInterface.bulkDelete("Users", null, {});
+  },
   async down(queryInterface, Sequelize) {
     await queryInterface.bulkDelete("Users", null, {});
   },
