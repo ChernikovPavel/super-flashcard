@@ -10,12 +10,18 @@ export const getEntries = createAsyncThunk('entries/all', async (): Promise<IEnt
 })
 
 // * Работа с юзером
-export const getUser = createAsyncThunk('user/get', async (): Promise<IUser> => {
-  const { data } = await axiosInstance.get(`${VITE_API}/tokens/refresh`)
-  console.log("data:", data)
-  setAccessToken(data.accessToken);
-  return data.user
-}) 
+export const getUser = createAsyncThunk(
+  "user/get",
+  async (): Promise<IUser> => {
+    const { data } = await axiosInstance.get(`${VITE_API}/tokens/refresh`);
+    if (data.accessToken) setAccessToken(data.accessToken);
+    if (data.user) {
+      return data.user;
+    } else {
+      return initUserState;
+    }
+  }
+);
 
 export const authUser = createAsyncThunk("user/auth", async (obj) => {
   const { data }: AxiosResponse = await axiosInstance.post(
