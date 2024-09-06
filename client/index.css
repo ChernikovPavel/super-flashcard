@@ -1,5 +1,6 @@
 :root {
-  --main-bg-color: white;
+  --main-bg-light-color: #eef4ed;
+  --second-bg-light-color: #8da9c4;
 }
 
 * {
@@ -16,4 +17,7 @@
 
 .curt {
   border: red solid 1px
+}
+.outlet {
+  height: 90vh;
 }

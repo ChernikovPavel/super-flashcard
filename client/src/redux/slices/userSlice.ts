@@ -1,54 +1,63 @@
-import { initUserState } from '../initStates/initStates'
-import { IUser } from '../types/stateTypes'
-import { createSlice } from '@reduxjs/toolkit';
-import { authUser, getUser } from "../thunkActions"
+import { initUserState } from "../initStates/initStates";
+import { IUser } from "../types/stateTypes";
+import { createSlice } from "@reduxjs/toolkit";
+import { authUser, getUser, logoutUser } from "../thunkActions";
 
 export type UserState = {
-  user: IUser,
-  loading: boolean,
-  error: object 
-}
+  user: IUser;
+  loading: boolean;
+  error: object;
+};
 
 const initialState = {
   user: initUserState,
   loading: true,
-  error: {}
-}
+  error: {},
+};
 
 const userSlice = createSlice({
-  name: 'UserReducer',
+  name: "UserReducer",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getUser.pending, (state) => {
-      state.loading = true
-    })
+      state.loading = true;
+    });
     builder.addCase(getUser.fulfilled, (state, action) => {
-      state.user = action.payload
-      console.log("action:", action)
-      state.loading = false
-    })
+      state.user = action.payload;
+      state.loading = false;
+    });
     builder.addCase(getUser.rejected, (state, action) => {
-      state.error = action.payload
-      state.loading = false
-    })
+      state.error = action.payload;
+      state.loading = false;
+    });
 
     // * авторизация / регистрация
     builder.addCase(authUser.pending, (state) => {
-      console.log('authUser', authUser)
-      state.loading = true
-    })
+      state.loading = true;
+    });
     builder.addCase(authUser.fulfilled, (state, action) => {
-      state.user = action.payload
-      console.log("action:", action)
-      state.loading = false
-    })
+      state.user = action.payload;
+      state.loading = false;
+    });
     builder.addCase(authUser.rejected, (state, action) => {
-      console.log('authUser', authUser, action)
-      state.error = action.payload
-      state.loading = false
-    })
-  }
-})
+      state.error = action.payload;
+      state.loading = false;
+    });
 
-export default userSlice.reducer
+    // * Logout
+    builder.addCase(logoutUser.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(logoutUser.fulfilled, (state) => {
+      state.user = initUserState;
+      state.loading = false;
+    });
+    builder.addCase(logoutUser.rejected, (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+    });
+  },
+});
+
+export default userSlice.reducer;
