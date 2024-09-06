@@ -29,11 +29,17 @@ const entriesSlice = createSlice({
 
   },
   extraReducers: (builder: ActionReducerMapBuilder<EntriesState>) => {
-    // * Получение
     builder.addCase(getEntries.pending, (state) => {
       state.loading = true
     })
- 
+    builder.addCase(getEntries.fulfilled, (state, action) => {
+      state.entries = action.payload
+      state.loading = false
+    })
+    builder.addCase(getEntries.rejected, (state, action) => {
+      state.error = (action.payload as Error)
+      state.loading = false
+    })
   },
 })
 
