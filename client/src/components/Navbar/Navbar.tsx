@@ -25,6 +25,13 @@ export default function Navbar(): JSX.Element {
           {user?.email ? (
             <>
               <Tabs.Trigger
+                value="game"
+                className={styles.button}
+                onClick={() => navigate("/game")}
+              >
+                игра
+              </Tabs.Trigger>
+              <Tabs.Trigger
                 value="account"
                 className={styles.button}
                 onClick={() => navigate("/account")}
@@ -37,14 +44,6 @@ export default function Navbar(): JSX.Element {
                 onClick={logoutHandler}
               >
                 Выход
-              </Tabs.Trigger>
-
-              <Tabs.Trigger
-                value="game"
-                className={styles.button}
-                onClick={() => navigate("/game")}
-              >
-                игра
               </Tabs.Trigger>
             </>
           ) : (

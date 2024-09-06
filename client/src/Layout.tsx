@@ -8,7 +8,7 @@ export default function Layout(): JSX.Element {
       <Flex justify="center" align="center">
         <Navbar />
       </Flex>
-      <Flex justify="center" align="center" className="outlet">
+      <Flex justify="center" align="center" className="outlet" direction='column'>
         <Outlet />
       </Flex>
     </>
