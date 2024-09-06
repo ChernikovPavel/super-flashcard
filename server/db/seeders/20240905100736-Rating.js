@@ -5,15 +5,17 @@ const { User } = require('../models');
 module.exports = {
   async up(queryInterface, Sequelize) {
     const refTable = await User.findAll({ attributes: ['id'] });
-    const ids = refTable.map(el => (el.dataValues.id))
+    const ids = refTable.map((el) => el.dataValues.id);
     const arr = [];
-    for(let i = 0; i < ids.length; i+=1){
-      arr.push({
-        UserId: ids[i],
-        score: Math.floor(Math.random() * 100) * 100
-      })
+    for (let i = 0; i < ids.length; i += 1) {
+      for (let j = 0; j < 3; j += 1) {
+        arr.push({
+          UserId: ids[i],
+          score: Math.floor(Math.random() * 100) * 100,
+        });
+      }
     }
-    await queryInterface.bulkInsert('Ratings', arr)
+    await queryInterface.bulkInsert('Ratings', arr);
   },
 
   async down(queryInterface, Sequelize) {
