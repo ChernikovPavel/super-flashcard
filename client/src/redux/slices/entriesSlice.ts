@@ -33,29 +33,7 @@ const entriesSlice = createSlice({
     builder.addCase(getEntries.pending, (state) => {
       state.loading = true
     })
-    // * action.payload берётся из axios, из ф-ии getEntries
-    builder.addCase(getEntries.fulfilled, (state, action) => {
-      state.entries = action.payload
-      state.loading = false
-    })
-    builder.addCase(getEntries.rejected, (state, action) => {
-      state.error = (action.payload as Error)
-      state.loading = false
-    })
-
-    // * Добавление
-    builder.addCase(addEntrie.pending, (state) => {
-      state.loading = true;
-    })
-    builder.addCase(addEntrie.fulfilled, (state, action) => {
-      state.entries.push(action.payload)
-      state.loading = false
-    })
-    builder.addCase(addEntrie.rejected, (state, action) => {
-      state.error = (action.payload as Error)
-      state.loading = false
-    })
-
+ 
   },
 })
 
