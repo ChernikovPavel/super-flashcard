@@ -18,6 +18,10 @@ export interface IStats {
   };
 }
 
+export interface IQuestion{
+
+}
+
 export interface IEntrie {
   id: number;
   name: string;

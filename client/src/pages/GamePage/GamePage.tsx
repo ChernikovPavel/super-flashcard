@@ -7,6 +7,7 @@ import { IQuestion, ITopic } from '../../redux/types/stateTypes';
 import * as Dialog from '@radix-ui/react-dialog';
 import { disable } from '../../redux/slices/entriesSlice';
 import axiosInstance from '../../../axiosInstance';
+import { sendPointsBody } from '../../types/types';
 
 // перемешивает элементы (аналогичен map())
 const rmap = (arr: Array<unknown>, cb: CallableFunction) => {
@@ -20,7 +21,7 @@ const rmap = (arr: Array<unknown>, cb: CallableFunction) => {
 };
 
 // отправка поинтов
-const sendPoints = (body: object): void => {
+const sendPoints = (body: sendPointsBody): void => {
   console.log('sended!', body.score);
   axiosInstance.post('/api/game/rating', body);
 };
