@@ -26,7 +26,7 @@ function App() {
         {
           path: "/",
           element: (
-            <ProtectedRoute authUser={user.name} redirectTo={"/"}>
+            <ProtectedRoute authUser={user.name} redirectTo="/">
               <AuthPage />
             </ProtectedRoute>
           ),

@@ -38,6 +38,14 @@ export default function Navbar(): JSX.Element {
               >
                 Выход
               </Tabs.Trigger>
+
+              <Tabs.Trigger
+                value="game"
+                className={styles.button}
+                onClick={() => navigate("/game")}
+              >
+                игра
+              </Tabs.Trigger>
             </>
           ) : (
             <>

@@ -46,6 +46,7 @@ export default function GamePage(): JSX.Element {
     };
   }, [dispatch]);
 
+    // название топика
   const TitleElement = ({ el: { title } }: { el: ITopic }): JSX.Element => (
     <div>
       <div className={style.flex}>
@@ -55,34 +56,41 @@ export default function GamePage(): JSX.Element {
         className={style.separator}
         decorative
         orientation="horizontal"
-      />
+        />
     </div>
   );
-
+  
+  
+  // кнопка ответа
   const AnswerButton = ({ el }) => {
     return (
       <button
-        onClick={() => {
+      onClick={() => {
           changePoints((p) =>
             el.trueness ? p + asker.question.score : p - asker.question.score
-          );
-          dispatch(disable(asker.indexes));
-        }}
+        );
+        dispatch(disable(asker.indexes));
+        changeAsker(p => ({...p, open:false}))
+      }}
       >
         {el.content}
       </button>
     );
   };
-
+  //обновляется после каждого нажатия на AnswerButton
+  console.log(points)
+  
+  // хэндлер для вопросов
   const questionHandler = (el: ITopic, questionIndex: number) => {
     const question = el.Questions[questionIndex];
-    changeAsker((p) => ({
+    changeAsker({
       question,
       open: true,
       indexes: [el.topicIndex, questionIndex],
-    }));
+    });
   };
 
+  // группа кнопок вопросов (100,200...)
   const TopicButtons = ({ el }: { el: ITopic }): JSX.Element => (
     <div className={style.flex}>
       <button
@@ -123,6 +131,7 @@ export default function GamePage(): JSX.Element {
     </div>
   );
 
+  // главный компонент
   return (
     <>
       <div className={style.field}>
