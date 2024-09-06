@@ -12,14 +12,16 @@ export interface IEntrie {
   description: string,
   userId: number,
   createdAt: string,
-  updatedAt: string
+  updatedAt: string,
+  avaible: boolean
 }
 
 export interface ITopic {
   id: number,
   title: string,
   updatedAt: string,
-  Questions?: IQuestion[]
+  Questions: IQuestion[],
+  topicIndex: number
 }
 
 export interface IQuestion {
@@ -30,6 +32,7 @@ export interface IQuestion {
   createdAt: string,
   updatedAt: string,
   Answers?: Array<IAnswer>
+  avaible?: boolean
 }
 
 export interface IAnswer {

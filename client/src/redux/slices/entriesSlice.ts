@@ -1,11 +1,14 @@
-import { ActionReducerMapBuilder, createSlice } from "@reduxjs/toolkit"
+import { ActionReducerMapBuilder, createSlice, Draft, PayloadAction } from "@reduxjs/toolkit"
 import { IEntrie } from "../../types/stateTypes"
 import { addEntrie, delEntrie, getEntries } from "../thunkActions"
+import { CounterState } from "./counterSlice"
+import { IQuestion } from "../types/stateTypes"
 
 export type EntriesState = {
-  entries: IEntrie[],
+  entries: IQuestion[],
   loading: boolean,
   error: object 
+
 }
 
 const initState: EntriesState = {
@@ -17,7 +20,14 @@ const initState: EntriesState = {
 const entriesSlice = createSlice({
   name: 'EntriesReducer',
   initialState: initState,
-  reducers: {},
+  reducers: {
+    disable(state: Draft<EntriesState>, action: PayloadAction<number[]>): void {
+      // console.log(state.entries)
+      // console.log('index', action.payload[0])
+      state.entries[action.payload[0]].Questions[action.payload[1]].avaible = false
+    },
+
+  },
   extraReducers: (builder: ActionReducerMapBuilder<EntriesState>) => {
     // * Получение
     builder.addCase(getEntries.pending, (state) => {
@@ -61,4 +71,5 @@ const entriesSlice = createSlice({
   },
 })
 
+export const { disable } = entriesSlice.actions
 export default entriesSlice.reducer

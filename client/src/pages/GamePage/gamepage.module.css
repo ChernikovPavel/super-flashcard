@@ -1,13 +1,47 @@
 :root {
   --sidebar-length: 25%;
+  --modal-width: 40rem
+}
+button {
+    padding: .5rem;
+    border-radius: 5px;
+    
+    text-align: center;
+    display: block;
+
+    &:hover {
+        transform: scale(1.05);
+        transition: 0.1s;
+      }
+      &:active {
+        transform: scale(1.02);
+      }
+      transition: 0.15s;
+}
+
+.closemodalbtn{
+  border-radius: 45%;
+  width: 30px;
+  height: 30px;
+    position: absolute;
+    top: 1rem;
+    right: 1.1rem;
+    &:hover {
+      transform: none
+    }
+
 }
 
 .flex {
   display: flex;
 }
 
+.grid{
+    display: grid;
+}
+
 .field {
-    padding: .5em;
+  padding: 0.5em;
   margin: 10em auto;
   background-color: var(--main-gray-color);
   color: var(--main-light-color);
@@ -37,15 +71,59 @@
     height: 4.5em;
 
     > button {
-        margin: .17em;
-        width: 30%;
-        border-radius: 5px;
+      margin: 0.17em;
+      width: 30%;
+      border-radius: 5px;
 
-        font-size: 30pt;
-        text-align: center;
-        display: block;
+      font-size: 39px;
+      text-align: center;
+      display: block;
+
+      &:hover {
+        transform: scale(1.05);
+        transition: 0.1s;
+      }
+      &:active {
+        transform: scale(1.02);
+      }
+      transition: 0.5s;
     }
   }
+}
+
+.modal {
+    position: fixed;
+    padding: 1rem;
+    border-radius: 5px;
+    width: var(--modal-width);
+    top: 20rem;
+    left: calc((100% - var(--modal-width))/2);
+    background-color: var(--main-gray-color);
+    color: var(--main-light-color);
+
+    > .grid {
+        margin-top: 1.5rem;
+        grid-template-columns: 50% 50%;
+        >button {
+            margin: .2rem .1rem 0;
+
+            &:hover {
+                transform: scale(1.01);
+                transition: 0.1s;
+              }
+              &:active {
+                transform: scale(1.0012);
+              }
+              transition: 0.5s;
+            
+        }
+    }
+
+    > .flex {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 80%;
+    }
 }
 
 .separator {
