@@ -15,7 +15,6 @@ module.exports = {
           content: `${!(j % 4) ? 'правильный' : 'нерпавильный'} ответ №${j}`,
           trueness: !(j % 4)
         });
-          console.log("up > ref[i].id >", ref[i].id)
       }
     }
     await queryInterface.bulkInsert('Answers', arr)

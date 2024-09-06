@@ -1,23 +1,21 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance, { setAccessToken } from "../../axiosInstance";
 import { AxiosResponse } from "axios";
-import { IUser } from "./types/stateTypes";
-import { initUserState } from "./initStates/initStates";
+import { IEntrie, IUser} from './types/stateTypes';
+const { VITE_API }: ImportMeta['env'] = import.meta.env;
 
-const { VITE_API }: ImportMeta["env"] = import.meta.env;
+export const getEntries = createAsyncThunk('entries/all', async (): Promise<IEntrie[]> => {
+  const { data }: AxiosResponse<IEntrie[]> = await axiosInstance.get(`${VITE_API}/game/deck`)
+  return data
+})
 
-export const getUser = createAsyncThunk(
-  "user/get",
-  async (): Promise<IUser> => {
-    const { data } = await axiosInstance.get(`${VITE_API}/tokens/refresh`);
-    if (data.accessToken) setAccessToken(data.accessToken);
-    if (data.user) {
-      return data.user;
-    } else {
-      return initUserState;
-    }
-  }
-);
+// * Работа с юзером
+export const getUser = createAsyncThunk('user/get', async (): Promise<IUser> => {
+  const { data } = await axiosInstance.get(`${VITE_API}/tokens/refresh`)
+  console.log("data:", data)
+  setAccessToken(data.accessToken);
+  return data.user
+}) 
 
 export const authUser = createAsyncThunk("user/auth", async (obj) => {
   const { data }: AxiosResponse = await axiosInstance.post(

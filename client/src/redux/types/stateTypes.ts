@@ -4,6 +4,15 @@ export interface IUser {
   email: string;
 }
 
+export interface IEntrie {
+  id: number;
+  name: string;
+  description: string;
+  userId: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface IAuth {
   name: string;
   email: string;
