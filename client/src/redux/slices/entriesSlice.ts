@@ -56,18 +56,6 @@ const entriesSlice = createSlice({
       state.loading = false
     })
 
-    // * Удаление
-    builder.addCase(delEntrie.pending, (state) => {
-      state.loading = true;
-    })
-    builder.addCase(delEntrie.fulfilled, (state, action) => {
-      state.entries = state.entries.filter((el) => el.id !== action.payload)
-      state.loading = false
-    }) 
-    builder.addCase(delEntrie.rejected, (state, action) => {
-      state.error = (action.payload as Error)
-      state.loading = false
-    })
   },
 })
 
