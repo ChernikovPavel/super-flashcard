@@ -21,7 +21,7 @@ const rmap = (arr: Array<unknown>, cb: CallableFunction) => {
 
 // отправка поинтов
 const sendPoints = (body: object): void => {
-  console.log('sended!', body)
+  console.log('sended!', body.score);
   axiosInstance.post('/api/game/rating', body);
 };
 
@@ -34,22 +34,24 @@ export default function GamePage(): JSX.Element {
   const [asker, changeAsker] = useState(initAsker);
   const [points, changePoints] = useState(0);
   const [betweenpoints, changeBetweenPoints] = useState(points);
+  const [test, changeTest] = useState(false);
   const { entries } = useAppSelector((state) => state.entriesSlice);
+  const { user } = useAppSelector((state) => state.userSlice);
   const dispatch = useAppDispatch();
-
   useEffect(() => {
+    if (points === 0) {
     dispatch(getEntries());
+    }
     return () => {
       if (points === betweenpoints) {
         console.log('sended!');
-        sendPoints({ UserId: 6, score: points });
+        sendPoints({ UserId: user.id, score: points });
       } else {
         changeBetweenPoints(points);
-        console.log('betweenpoints', betweenpoints)
       }
     };
   }, [dispatch, points, betweenpoints]);
-
+  console.log(user);
   // название топика
   const TitleElement = ({ el: { title } }: { el: ITopic }): JSX.Element => (
     <div>
@@ -72,7 +74,7 @@ export default function GamePage(): JSX.Element {
           changePoints((p) =>
             el.trueness ? p + asker.question.score : p - asker.question.score
           );
-          dispatch(disable(asker.indexes));
+          if(!test) dispatch(disable(asker.indexes));
           changeAsker((p) => ({ ...p, open: false }));
         }}
       >
@@ -81,7 +83,7 @@ export default function GamePage(): JSX.Element {
     );
   };
   //обновляется после каждого нажатия на AnswerButton
-  console.log(points);
+  console.log('points', points);
 
   // хэндлер для кнопкок вопросов
   const questionHandler = (el: ITopic, questionIndex: number) => {
@@ -142,8 +144,19 @@ export default function GamePage(): JSX.Element {
   // главный компонент
   return (
     <>
-      <div>
-        <p className={points > 0 ? style.countergreen : points < 0 ? style.counterred : style.counter}>{Math.abs(points)}</p>
+      <div className={style.flex}>
+        <p
+          className={
+            points > 0
+              ? style.countergreen
+              : points < 0
+              ? style.counterred
+              : style.counter
+          }
+          onClick={() => {changeTest(true)}}
+        >
+          Ты {points > 0 ?'на' : 'недо'}брал {Math.abs(points)} очков
+        </p>
       </div>
       <div className={style.field}>
         <div className={style.sidepanel}>

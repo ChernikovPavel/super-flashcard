@@ -41,7 +41,6 @@ button {
 
 .field {
   padding: 0.5em;
-  margin: 10em auto;
   background-color: var(--main-gray-color);
   color: var(--main-light-color);
   width: 60em;
@@ -53,14 +52,23 @@ button {
 }
 
 .sidepanel {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  
   > div {
-    padding: 1em;
-    height: 4.5em;
-    > .flex > span {
-      margin: auto 0;
-      text-align: center;
+    height: 2em;
+    font-size: 24pt;
+    > .flex {
+      display:block;
+    height: 100%;
+      
+      > span {
+      margin-left: .6em;
+      /* text-align: center; */
       display: block;
-    }
+      align-items: center;
+    }}
   }
 }
 
@@ -103,6 +111,14 @@ button {
   transition: 1s;
 }
 
+@keyframes :(gomyModal) {
+  0% {
+    opacity: 0;
+  }
+  0% {
+    opacity: 1;
+  }
+}
 
 .modal {
   position: fixed;
@@ -113,7 +129,9 @@ button {
   left: calc((100% - var(--modal-width)) / 2);
   background-color: var(--main-gray-color);
   color: var(--main-light-color);
+  box-shadow: 6px 8px 23px black;
 
+  animation: myModal 1s;
 
   > .grid {
     margin-top: 1.5rem;
@@ -141,7 +159,7 @@ button {
 
 .separator {
   background-color: var(--second-light-color);
-  margin-top: 1em;
+  /* margin-top: 1em; */
   height: 1px;
   width: 90%;
 }
