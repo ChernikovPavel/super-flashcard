@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Topic, Question, Answer } = require('../../db/models');
+const { Topic, Question, Answer, Rating } = require('../../db/models');
 
 router.get('/deck', async (req, res) => {
   try {
@@ -8,12 +8,23 @@ router.get('/deck', async (req, res) => {
       order: [[{model: Question}, 'score', 'ASC']]
     });
     deck.map((el, i) => {el.dataValues.topicIndex = i ;return el.dataValues.Questions.map(el2 => {el2.dataValues.avaible = true; return el2})})
-    console.log(deck[0])
     res.send(deck);
   } catch (error) {
     console.log(error)
     res.sendStatus(500);
   }
 });
+
+router.post('/rating', async (req,res) => {
+  try {
+    const {UserId, score} = req.body
+    const data = await Rating.create({UserId, score})
+    console.log(data)
+    res.status(201).json(data)
+  } catch (error) {
+    console.log(error)
+    res.sendStatus(500)
+  }
+})
 
 module.exports = router;

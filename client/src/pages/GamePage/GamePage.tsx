@@ -6,6 +6,7 @@ import { getEntries } from '../../redux/thunkActions';
 import { IQuestion, ITopic } from '../../redux/types/stateTypes';
 import * as Dialog from '@radix-ui/react-dialog';
 import { disable } from '../../redux/slices/entriesSlice';
+import axiosInstance from '../../../axiosInstance';
 // import {Button, Dialog, Flex, Text, TextField} from '@radix-ui/themes'
 
 const rmap = (arr: Array<unknown>, cb: CallableFunction) => {
@@ -18,15 +19,32 @@ const rmap = (arr: Array<unknown>, cb: CallableFunction) => {
   return result;
 };
 
+const sendPoints = (body: object): void => {
+  axiosInstance.post('/api/game/rating', body);
+};
+
 export default function GamePage(): JSX.Element {
-  const initAsker = { open: false, question: { Answers: [], content: '' }, indexes: [] };
+  const initAsker = {
+    open: false,
+    question: { Answers: [], content: '' },
+    indexes: [],
+  };
   const [asker, changeAsker] = useState(initAsker);
-  const [gameMaster, changeGameMaster] = useState(0);
+  const [points, changePoints] = useState(0);
+  const [betweenpoints, changeBetweenPoints] = useState(points);
   const { entries } = useAppSelector((state) => state.entriesSlice);
   const dispatch = useAppDispatch();
   console.log(entries);
   useEffect(() => {
     dispatch(getEntries());
+    return () => {
+      if (points === betweenpoints) {
+        console.log('sended!')
+        sendPoints({ UserId: 1, score:points });
+      } else {
+        changeBetweenPoints(points);
+      }
+    };
   }, [dispatch]);
 
   const TitleElement = ({ el: { title } }: { el: ITopic }): JSX.Element => (
@@ -42,10 +60,28 @@ export default function GamePage(): JSX.Element {
     </div>
   );
 
+  const AnswerButton = ({ el }) => {
+    return (
+      <button
+        onClick={() => {
+          changePoints((p) =>
+            el.trueness ? p + asker.question.score : p - asker.question.score
+          );
+          dispatch(disable(asker.indexes));
+        }}
+      >
+        {el.content}
+      </button>
+    );
+  };
+
   const questionHandler = (el: ITopic, questionIndex: number) => {
     const question = el.Questions[questionIndex];
-    console.log(question);
-    changeAsker((p) => ({ question, open: true, indexes: [el.topicIndex, questionIndex] }));
+    changeAsker((p) => ({
+      question,
+      open: true,
+      indexes: [el.topicIndex, questionIndex],
+    }));
   };
 
   const TopicButtons = ({ el }: { el: ITopic }): JSX.Element => (
@@ -88,13 +124,7 @@ export default function GamePage(): JSX.Element {
     </div>
   );
 
-  const AnswerButton = ({ el }) => {
-    console.log(asker.indexes)
-    return <button onClick={() => {
-      dispatch(disable(asker.indexes))
-    }}>{el.content}</button>;
-  };
-
+  console.log(points);
   return (
     <>
       <div className={style.field}>
