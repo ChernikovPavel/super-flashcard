@@ -12,12 +12,10 @@ export const getEntries = createAsyncThunk('entries/all', async (): Promise<IEnt
 
 export const addEntrie = createAsyncThunk('entrie/add', async (inputs: IInputs): Promise<IEntrie> => {
   const { data }: AxiosResponse<IEntrie> = await axiosInstance.post(`${VITE_API}/tasks`, inputs);
-  console.log("data:", data)
   return data
 })
 
 export const delEntrie = createAsyncThunk('entrie/del', async (id: number): Promise<number> => {
-  console.log('ID', id)
   await axiosInstance.delete(
     `${import.meta.env.VITE_API}/tasks/${id}`
   );
@@ -27,7 +25,6 @@ export const delEntrie = createAsyncThunk('entrie/del', async (id: number): Prom
 // * Работа с юзером
 export const getUser = createAsyncThunk('user/get', async (): Promise<IUser> => {
   const { data } = await axiosInstance.get(`${VITE_API}/tokens/refresh`)
-  console.log("data:", data)
   setAccessToken(data.accessToken);
   return data.user
 }) 

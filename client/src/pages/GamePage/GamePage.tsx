@@ -34,7 +34,6 @@ export default function GamePage(): JSX.Element {
   const [betweenpoints, changeBetweenPoints] = useState(points);
   const { entries } = useAppSelector((state) => state.entriesSlice);
   const dispatch = useAppDispatch();
-  console.log(entries);
   useEffect(() => {
     dispatch(getEntries());
     return () => {
@@ -146,7 +145,7 @@ export default function GamePage(): JSX.Element {
           <Dialog.Description>{asker.question.content}</Dialog.Description>
           <div className={style.grid}>
             {rmap(asker.question.Answers, (el) => (
-              <AnswerButton el={el} />
+              <AnswerButton el={el} key={el.id}/>
             ))}
           </div>
           {/* prettier-ignore */}

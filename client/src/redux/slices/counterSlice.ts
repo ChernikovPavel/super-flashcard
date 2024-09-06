@@ -23,7 +23,6 @@ const counterSlice: CounterSlice = createSlice({
     }
   }
 })
-console.log('counterSlice', counterSlice)
 
 export default counterSlice.reducer
 

@@ -25,7 +25,6 @@ const userSlice = createSlice({
     })
     builder.addCase(getUser.fulfilled, (state, action) => {
       state.user = action.payload
-      console.log("action:", action)
       state.loading = false
     })
     builder.addCase(getUser.rejected, (state, action) => {
@@ -35,16 +34,13 @@ const userSlice = createSlice({
 
     // * авторизация / регистрация
     builder.addCase(authUser.pending, (state) => {
-      console.log('authUser', authUser)
       state.loading = true
     })
     builder.addCase(authUser.fulfilled, (state, action) => {
       state.user = action.payload
-      console.log("action:", action)
       state.loading = false
     })
     builder.addCase(authUser.rejected, (state, action) => {
-      console.log('authUser', authUser, action)
       state.error = action.payload
       state.loading = false
     })
