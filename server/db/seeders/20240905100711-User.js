@@ -12,7 +12,7 @@ module.exports = {
     for(let i = salt; i < max; i+=1) mixedMockNames.push(mockNames[i % mockNames.length])
     for (let i = 1; i <= 4; i += 1) {
       arr.push({
-        name: mixedMockNames[i],
+        name: mixedMockNames[i % 4],
         email: `${i}@${i}`,
         password: bcrypt.hashSync(String(i), 10),
       });

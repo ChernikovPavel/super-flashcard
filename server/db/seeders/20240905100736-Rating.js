@@ -11,7 +11,7 @@ module.exports = {
       for (let j = 0; j < 3; j += 1) {
         arr.push({
           UserId: ids[i],
-          score: Math.floor(Math.random() * 100) * 100,
+          score: Math.floor(Math.random() * 10) * 100,
         });
       }
     }
