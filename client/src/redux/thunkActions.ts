@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance, { setAccessToken } from "../../axiosInstance";
 import { AxiosResponse } from "axios";
-import { IUser } from "./types/stateTypes";
+import { IStats, IUser } from "./types/stateTypes";
 
 const { VITE_API }: ImportMeta["env"] = import.meta.env;
 
@@ -28,3 +28,8 @@ export const logoutUser = createAsyncThunk("user/logout", async () => {
   await axiosInstance.get(`${VITE_API}/auth/logout`);
   setAccessToken("");
 });
+
+export const getStats = createAsyncThunk('stats/all', async (): Promise<IStats[]> => {
+  const { data }: AxiosResponse<IStats[]> = await axiosInstance.get(`${VITE_API}/stats`)
+  return data
+})

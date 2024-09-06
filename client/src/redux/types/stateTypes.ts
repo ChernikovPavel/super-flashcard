@@ -10,3 +10,12 @@ export interface IAuth {
   email: string;
   password: string;
 }
+
+export interface IStats {
+  id: number,
+  UserId: number,
+  score: number,
+  createdAt: string,
+  updatedAt: string,
+  User: IUser
+}
