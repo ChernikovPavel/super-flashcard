@@ -22,8 +22,6 @@ const entriesSlice = createSlice({
   initialState: initState,
   reducers: {
     disable(state: Draft<EntriesState>, action: PayloadAction<number[]>): void {
-      // console.log(state.entries)
-      // console.log('index', action.payload[0])
       state.entries[action.payload[0]].Questions[action.payload[1]].avaible = false
     },
 

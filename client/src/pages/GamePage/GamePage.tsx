@@ -123,7 +123,6 @@ export default function GamePage(): JSX.Element {
     </div>
   );
 
-  console.log(points);
   return (
     <>
       <div className={style.field}>

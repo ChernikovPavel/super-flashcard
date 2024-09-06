@@ -10,7 +10,6 @@ import * as Form from "@radix-ui/react-form";
 export default function AuthForm(): JSX.Element {
   const [inputs, setInputs] = useState<IAuth>(initAuthState);
 
-  console.log(inputs);
   
 
   const { authStatus } = useAppSelector((state) => state.authSlice);

@@ -12,7 +12,6 @@ import "@radix-ui/themes/styles.css";
 
 function App() {
   const { user } = useAppSelector((state) => state.userSlice);
-  console.log('us',user)
   const dispatch = useAppDispatch();
 
   useEffect(() => {
