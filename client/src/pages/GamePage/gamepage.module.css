@@ -63,12 +63,12 @@ button {
       display:block;
     height: 100%;
       
-      > span {
-      margin-left: .6em;
-      /* text-align: center; */
-      display: block;
-      align-items: center;
-    }}
+    > span {
+    margin-left: .6em;
+    /* text-align: center; */
+    display: block;
+    align-items: center;
+  }}
   }
 }
 
@@ -99,26 +99,32 @@ button {
 }
 
 .counter {
+  font-size: 24pt;
+  margin-bottom: 1rem;
   color: var(--second-light-color);
   transition: 1s;
 }
 .countergreen{
+  font-size: 24pt;
+  margin-bottom: 1rem;
   color: green;
   transition: 1s;
 }
 .counterred {
+  font-size: 24pt;
+  margin-bottom: 1rem;
   color: red;
   transition: 1s;
 }
 
-@keyframes :(gomyModal) {
+/* @keyframes :global(myModal) {
   0% {
     opacity: 0;
   }
   0% {
     opacity: 1;
   }
-}
+} */
 
 .modal {
   position: fixed;
