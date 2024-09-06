@@ -9,7 +9,7 @@ const verifyRefreshToken = (req, res, next) => {
     next()
   } catch (error) {
     console.log("Invalid refresh", error)
-    res.status(400).json({ message: "Invalid refresh" })
+    res.status(200).json({ message: "Invalid refresh" })
   }
 }
 

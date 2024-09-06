@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance, { setAccessToken } from "../../axiosInstance";
 import { AxiosResponse } from "axios";
 import { IUser } from "./types/stateTypes";
+import { initUserState } from "./initStates/initStates";
 
 const { VITE_API }: ImportMeta["env"] = import.meta.env;
 
@@ -9,9 +10,12 @@ export const getUser = createAsyncThunk(
   "user/get",
   async (): Promise<IUser> => {
     const { data } = await axiosInstance.get(`${VITE_API}/tokens/refresh`);
-    console.log("data:", data);
-    setAccessToken(data.accessToken);
-    return data.user;
+    if (data.accessToken) setAccessToken(data.accessToken);
+    if (data.user) {
+      return data.user;
+    } else {
+      return initUserState;
+    }
   }
 );
 

@@ -10,10 +10,12 @@ import * as Form from "@radix-ui/react-form";
 export default function AuthForm(): JSX.Element {
   const [inputs, setInputs] = useState<IAuth>(initAuthState);
 
+  console.log(inputs);
+  
+
   const { authStatus } = useAppSelector((state) => state.authSlice);
 
   const dispatch = useAppDispatch();
-  // <Button onClick={() => dispatch(increment(1))}>+1</Button>
 
   const navigate: NavigateFunction = useNavigate();
 
@@ -38,7 +40,33 @@ export default function AuthForm(): JSX.Element {
 
   return (
     <Form.Root onSubmit={submitHandler} className={styles.Root}>
-      {authStatus === "login" ? <h2>Авторизация</h2> : <h2>Регистрация</h2>}
+      {authStatus === "login" ? <h2>Авторизация</h2> : (<>
+        <h2>Регистрация</h2>
+        <Form.Field className={styles.Field} name="name">
+          <div
+            style={{
+              display: "flex",
+              alignItems: "baseline",
+              justifyContent: "space-between",
+            }}
+          >
+            <Form.Message className={styles.Message} match="valueMissing">
+              Введите ваше имя
+            </Form.Message>
+          </div>
+          <Form.Control asChild>
+            <input
+              className={styles.Input}
+              onChange={changeHandler}
+              type="text"
+              name="name"
+              value={inputs?.name}
+              placeholder="Ваше имя"
+              required
+            />
+          </Form.Control>
+        </Form.Field>
+        </>)}
       <>
         <Form.Field className={styles.Field} name="email">
           <div
@@ -49,10 +77,10 @@ export default function AuthForm(): JSX.Element {
             }}
           >
             <Form.Message className={styles.Message} match="valueMissing">
-              Введите пожалуйста ваш email
+              Введите ваш email
             </Form.Message>
             <Form.Message className={styles.Message} match="typeMismatch">
-              Укажите пожалуйта корректный email
+              Укажите корректный email
             </Form.Message>
           </div>
           <Form.Control asChild>
@@ -76,10 +104,10 @@ export default function AuthForm(): JSX.Element {
             }}
           >
             <Form.Message className={styles.Message} match="valueMissing">
-              Введите пожалоуйста ваш пароль
+              Введите ваш пароль
             </Form.Message>
             <Form.Message className={styles.Message} match="typeMismatch">
-              Пожалуйста укажите корректный пароль
+              Пожалуйста корректный пароль
             </Form.Message>
           </div>
           <Form.Control asChild>

@@ -2,10 +2,8 @@ import { IAuth, IUser } from "../types/stateTypes";
 
 export const initUserState: IUser = {
   id: 0,
-  username: "",
+  name: "",
   email: "",
-  createdAt: "",
-  updatedAt: "",
 };
 
-export const initAuthState: IAuth = { email: "", password: "" };
+export const initAuthState: IAuth = { name: "", email: "", password: "" };

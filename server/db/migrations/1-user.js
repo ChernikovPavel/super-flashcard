@@ -10,6 +10,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.BIGINT,
       },
+      name: {
+        allowNull: false,
+        type: Sequelize.STRING(32),
+      },
       email: {
         allowNull: false,
         unique: true,
