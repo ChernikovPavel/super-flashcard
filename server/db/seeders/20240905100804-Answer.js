@@ -1,10 +1,10 @@
-'use strict';
-const {Question} = require('../models')
+"use strict";
+const { Question } = require("../models");
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    const refTable = await Question.findAll({ attributes: ['id'] });
+  async up(queryInterface, Sequelize) {
+    const refTable = await Question.findAll({ attributes: ["id"] });
     const ref = refTable.map((el) => el.get());
     const arr = [];
 
@@ -12,15 +12,15 @@ module.exports = {
       for (let j = 1; j <= 4; j += 1) {
         arr.push({
           QuestionId: ref[i].id,
-          content: `${!(j % 4) ? 'правильный' : 'нерпавильный'} ответ №${j}`,
-          trueness: !(j % 4)
+          content: `${!(j % 4) ? "правильный" : "нерпавильный"} ответ №${j}`,
+          trueness: !(j % 4),
         });
       }
     }
-    await queryInterface.bulkInsert('Answers', arr)
+    await queryInterface.bulkInsert("Answers", arr);
   },
 
-  async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Answers', null, {});
-  }
+  async down(queryInterface, Sequelize) {
+    await queryInterface.bulkDelete("Answers", null, {});
+  },
 };

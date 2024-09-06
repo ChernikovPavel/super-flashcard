@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userSlice from "./slices/userSlice";
 import authSlice from "./slices/authSlice";
+import statsSlice from "./slices/statsSlice";
 import entriesSlice from "./slices/entriesSlice";
 
 export const store = configureStore({
@@ -8,6 +9,7 @@ export const store = configureStore({
     entriesSlice,
     userSlice,
     authSlice,
+    statsSlice
   },
 });
 
