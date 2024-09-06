@@ -1,12 +1,11 @@
 export interface IUser {
   id: number;
-  username: string;
+  name: string;
   email: string;
-  createdAt: string;
-  updatedAt: string;
 }
 
 export interface IAuth {
+  name: string;
   email: string;
   password: string;
 }

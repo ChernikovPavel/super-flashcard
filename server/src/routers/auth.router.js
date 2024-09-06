@@ -3,16 +3,17 @@ const { User } = require("../../db/models");
 const bcrypt = require("bcrypt");
 const generateToken = require("../../utils/generateToken");
 const cookieConfig = require("../../configs/cookieConfig");
-// const { Sequelize, Op } = require("sequelize");
 
 router
   .post("/register", async (req, res) => {
-    const { email, password } = req.body;
+    const { name, email, password } = req.body;
 
     try {
       const [user, isCreated] = await User.findOrCreate({
         where: { email: email },
+        attributes: { exclude: ["createdAt", "updatedAt"] },
         defaults: {
+          name,
           email,
           password: await bcrypt.hash(password, 10),
         },
@@ -23,6 +24,8 @@ router
       } else {
         const plainUser = user.get();
         delete plainUser.password;
+        delete plainUser.createdAt;
+        delete plainUser.updatedAt;
 
         const { accessToken, refreshToken } = generateToken({
           user: plainUser,
@@ -46,7 +49,10 @@ router
       res.status(400).json({ message: "All fields are required" });
     }
 
-    const user = await User.findOne({ where: { email } });
+    const user = await User.findOne({
+      where: { email },
+      attributes: { exclude: ["createdAt", "updatedAt"] },
+    });
 
     const isCorrectPassword = await bcrypt.compare(password, user.password);
 
