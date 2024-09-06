@@ -29,7 +29,7 @@ export default function Navbar(): JSX.Element {
                 className={styles.button}
                 onClick={() => navigate("/game")}
               >
-                игра
+                Игра
               </Tabs.Trigger>
               <Tabs.Trigger
                 value="account"

@@ -21,6 +21,7 @@ const rmap = (arr: Array<unknown>, cb: CallableFunction) => {
 
 // отправка поинтов
 const sendPoints = (body: object): void => {
+  console.log('sended!', body)
   axiosInstance.post('/api/game/rating', body);
 };
 
@@ -41,12 +42,13 @@ export default function GamePage(): JSX.Element {
     return () => {
       if (points === betweenpoints) {
         console.log('sended!');
-        sendPoints({ UserId: 1, score: points });
+        sendPoints({ UserId: 6, score: points });
       } else {
         changeBetweenPoints(points);
+        console.log('betweenpoints', betweenpoints)
       }
     };
-  }, [dispatch]);
+  }, [dispatch, points, betweenpoints]);
 
   // название топика
   const TitleElement = ({ el: { title } }: { el: ITopic }): JSX.Element => (
