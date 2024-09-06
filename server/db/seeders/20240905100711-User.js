@@ -20,7 +20,6 @@ module.exports = {
   
     }
     queryInterface.bulkInsert("Users", arr);
-    queryInterface.bulkInsert("Users", arr);
   },
 
   async down(queryInterface, Sequelize) {

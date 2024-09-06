@@ -39,9 +39,10 @@ export default function GamePage(): JSX.Element {
   const { user } = useAppSelector((state) => state.userSlice);
   const dispatch = useAppDispatch();
   useEffect(() => {
-    if (points === 0) {
     dispatch(getEntries());
-    }
+  }, [])
+
+  useEffect(() => {
     return () => {
       if (points === betweenpoints) {
         console.log('sended!');
