@@ -1,21 +1,19 @@
 export interface IUser {
   id: number;
-  username: string;
+  name: string;
   email: string;
-  createdAt: string;
-  updatedAt: string;
 }
 
 export interface IAuth {
+  name: string;
   email: string;
   password: string;
 }
 
 export interface IStats {
-  id: number,
-  UserId: number,
-  score: number,
-  createdAt: string,
-  updatedAt: string,
-  User: IUser
+  id: number;
+  score: number;
+  User: {
+    name: string;
+  };
 }
