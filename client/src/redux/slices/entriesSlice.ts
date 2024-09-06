@@ -1,6 +1,6 @@
 import { ActionReducerMapBuilder, createSlice, Draft, PayloadAction } from "@reduxjs/toolkit"
 import { IEntrie } from "../../types/stateTypes"
-import { addEntrie, delEntrie, getEntries } from "../thunkActions"
+import { getEntries } from "../thunkActions"
 import { CounterState } from "./counterSlice"
 import { IQuestion } from "../types/stateTypes"
 

@@ -8,6 +8,7 @@ module.exports = {
 
     for(let i = 1; i <= 10; i+=1){
       arr.push({
+        name: i,
         email: `${i}@${i}`,
         password: bcrypt.hashSync(String(i), 10),
       })

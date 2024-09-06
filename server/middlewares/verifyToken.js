@@ -1,8 +1,12 @@
-const jwt = require("jsonwebtoken")
+const jwt = require('jsonwebtoken')
+
 
 const verifyRefreshToken = (req, res, next) => {
   try {
-    const { refreshToken } = req.cookies
+    const { refreshToken = '' } = req.cookies
+
+    console.log(refreshToken)
+    // const { user } = jwt.verify('', '')
     const { user } = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET)
     res.locals.user = user
 

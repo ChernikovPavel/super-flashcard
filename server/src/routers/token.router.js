@@ -6,7 +6,6 @@ const cookieConfig = require("../../configs/cookieConfig");
 router.get("/refresh", verifyRefreshToken, (req, res) => {
   const { user } = res.locals;
   const { accessToken, refreshToken } = generateToken({ user });
-
   res
     .cookie("refreshToken", refreshToken, cookieConfig.refreshToken)
     .json({ user, accessToken });

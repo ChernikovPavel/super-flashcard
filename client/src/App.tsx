@@ -12,7 +12,7 @@ import "@radix-ui/themes/styles.css";
 
 function App() {
   const { user } = useAppSelector((state) => state.userSlice);
-
+  console.log('us',user)
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -27,7 +27,7 @@ function App() {
         {
           path: "/",
           element: (
-            <ProtectedRoute authUser={user.username} redirectTo={"/"}>
+            <ProtectedRoute authUser={user.name} redirectTo={"/"}>
               <AuthPage />
             </ProtectedRoute>
           ),
